@@ -20,3 +20,4 @@ footer{border-top:1px solid var(--line);color:#767d8a;font-size:.82rem}.foot-inn
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
 @media(max-width:680px){.hero-grid{grid-template-rows:auto auto;align-items:start}.hero{height:250px;max-height:fit-content;min-height:0}.overview{height:auto}.hero-content{flex:none}#cover-art{width:39%;top:60%;right:-5%;opacity:.85;transform:translateY(-50%)}}
 @media(max-width:370px){nav a{gap:3px;font-size:.78rem}nav a svg{width:13px;height:13px}.hero{height:auto;min-height:238px}.hero h1{font-size:1.9rem}.hero .button-row{gap:5px}.hero .btn{padding-inline:8px}.compact select{min-width:92px}.ring-row{gap:4px}}
+.slate{--tint:#e8edf3;--tone:#41607f}

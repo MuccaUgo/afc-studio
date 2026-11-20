@@ -3,12 +3,16 @@ const displayTopics = {
   statements:{group:'Accounting', icon:'bank', color:'blue', short:'Statements', summary:'Financial statements, period-end adjustments and group consolidation.'},
   analysis:{group:'Accounting', icon:'chart', color:'mint', short:'Analysis', summary:'Reclassifications, cash flows and ratios to compare companies.'},
   dcf:{group:'Finance', icon:'coins', color:'violet', short:'DCF', summary:'Forecast cash flows, cost of capital and enterprise value.'},
+  wacc:{group:'Finance', icon:'layers', color:'slate', short:'WACC', summary:'Cost of debt and equity, betas from comparables and the weighted average cost of capital.'},
   multiples:{group:'Finance', icon:'scales', color:'amber', short:'Multiples', summary:'Market multiples, choice of comparables and equity value estimates.'},
   budget:{group:'Control', icon:'budget', color:'rose', short:'Budget', summary:'Operating and financial budgets, costs and planning decisions.'},
   ai:{group:'Tools', icon:'ai', color:'aqua', short:'AI for AFC', summary:'Prompts, source checks and verification of results in business analysis.'}
 };
-const types = {choice:'Single choice',multi:'Multi-select',number:'Calculation',order:'Ordering'};
-const typeIcons = {choice:'list',multi:'checkList',number:'calc',order:'steps'};
+const types = {choice:'Single choice',multi:'Multi-select',number:'Calculation',order:'Ordering',exam:'Exam style (A–D)'};
+const typeIcons = {choice:'list',multi:'checkList',number:'calc',order:'steps',exam:'target'};
+// Exam-style questions are single-choice A–D cases modelled on the course exam bank.
+const kindOf=q=>q.exam?'exam':q.type;
+const isNoneOption=text=>/^none of the/i.test(text);
 const levels = {1:'Basic',2:'Intermediate',3:'Advanced'};
 const topics = Object.keys(displayTopics).map(id=>window.AFC_TOPICS.find(t=>t.id===id)).filter(Boolean);
 const topicById = new Map(topics.map(t=>[t.id,t]));
@@ -99,8 +103,9 @@ function metrics(list=allQuestions){
   return {done:tried.length,total:list.length,attempts,hits,percent:list.length?Math.round(100*tried.length/list.length):0,accuracy:attempts?Math.round(100*hits/attempts):null};
 }
 function makeSession(keys,mode,title){
-  const orders={}; for(const k of keys){const q=bank.get(k);if(q.options)orders[k]=shuffle(q.options.map((_,i)=>i));}
-  return {keys,mode,title,index:0,orders,answers:{},drafts:{},start:Date.now(),deadline:mode==='exam'?Date.now()+keys.length*120000:null};
+  // Options are shuffled, but "None of the other answers" stays last, as in the exam.
+  const orders={}; for(const k of keys){const q=bank.get(k);if(q.options){const idx=q.options.map((_,i)=>i);orders[k]=[...shuffle(idx.filter(i=>!isNoneOption(q.options[i]))),...idx.filter(i=>isNoneOption(q.options[i]))];}}
+  return {keys,mode,title,index:0,orders,answers:{},drafts:{},start:Date.now(),deadline:mode==='exam'?Date.now()+keys.length*180000:null};
 }
 function commitAnswer(session,key){
   if(Object.hasOwn(session.answers,key))return;
