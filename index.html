@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#21285c">
+  <meta name="description" content="Accounting, Finance and Control review. Quizzes, calculations, cases and mock exams organised by topic.">
+  <title>AFC Studio · Review dashboard</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="topbar"><div class="top-inner">
+    <a class="brand" href="#dashboard" aria-label="AFC Studio, dashboard"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M5 8.5 14 12v15L5 23.5zm12 3.5 10-4v15.5L17 27z" fill="currentColor"/><path d="m9 6 7 2.5L24 5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></span><span>AFC <b>Studio</b></span></a>
+    <nav id="nav" aria-label="Main navigation"></nav>
+    <a class="saved-nav" href="#saved" title="Saved exercises" aria-label="Saved exercises"><span data-icon="bookmark"></span><span class="saved-label">Saved</span><span id="saved-count">0</span></a>
+  </div></header>
+  <main id="main" tabindex="-1"></main>
+  <footer><div class="foot-inner"><span><strong>AFC Studio</strong> <span class="foot-dot">/</span> Accounting, Finance and Control</span><span><span data-icon="harddrive"></span> Progress saved in your browser</span></div></footer>
+  <dialog id="modal"></dialog><div role="status" aria-live="polite" id="toast"></div>
+  <script>window.AFC_TOPICS = [];</script>
+  <script src="accounting.js"></script><script src="finance.js"></script><script src="control.js"></script>
+  <script src="icons.js"></script><script src="engine.js"></script><script src="app.js"></script>
+</body>
+</html>
